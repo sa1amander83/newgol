@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление пользователями - PingPong Club</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <header class="bg-green-600 text-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-table-tennis-paddle-ball text-2xl mr-2"></i>
+                <h1 class="text-xl font-bold">PingPong Club</h1>
+            </div>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-6">
+                    <li><a href="index.html" class="hover:text-green-200">Главная</a></li>
+                    <li><a href="admin-users.html" class="hover:text-green-200 font-medium">Пользователи</a></li>
+                    <li><a href="admin-reports.html" class="hover:text-green-200">Отчеты</a></li>
+                    <li><a href="admin-settings.html" class="hover:text-green-200">Настройки</a></li>
+                    <li><a href="#" id="logout-link" class="hover:text-green-200">Выход</a></li>
+                </ul>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-white">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-green-700">
+            <ul class="container mx-auto px-4 py-2">
+                <li class="py-2"><a href="index.html" class="block hover:text-green-200">Главная</a></li>
+                <li class="py-2"><a href="admin-users.html" class="block hover:text-green-200">Пользователи</a></li>
+                <li class="py-2"><a href="admin-reports.html" class="block hover:text-green-200">Отчеты</a></li>
+                <li class="py-2"><a href="admin-settings.html" class="block hover:text-green-200">Настройки</a></li>
+                <li class="py-2"><a href="#" id="mobile-logout-link" class="block hover:text-green-200">Выход</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold">Управление пользователями</h1>
+            <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition duration-300">
+                <i class="fas fa-plus mr-2"></i> Добавить пользователя
+            </button>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+            <div class="p-4 border-b">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div class="relative flex-grow">
+                        <input type="text" placeholder="Поиск пользователей..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <div class="absolute left-3 top-2.5 text-gray-400">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <select class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <option value="">Все статусы</option>
+                            <option value="active">Активные</option>
+                            <option value="inactive">Неактивные</option>
+                            <option value="expired">Истек абонемент</option>
+                        </select>
+                        <select class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <option value="">Сортировка</option>
+                            <option value="name-asc">По имени (А-Я)</option>
+                            <option value="name-desc">По имени (Я-А)</option>
+                            <option value="date-asc">По дате регистрации (старые)</option>
+                            <option value="date-desc">По дате регистрации (новые)</option>
+                            <option value="visits-desc">По посещениям (больше)</option>
+                            <option value="visits-asc">По посещениям (меньше)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Пользователь</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Контакты</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Абонемент</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Посещения</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Статус</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">001</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Иван Иванов</div>
+                                        <div class="text-sm text-gray-500">Регистрация: 15.01.2023</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">ivan@example.com</div>
+                                <div class="text-sm text-gray-500">+7 (123) 456-78-90</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Стандартный</div>
+                                <div class="text-sm text-gray-500">До 15.06.2023</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <div class="text-sm text-gray-900">42 посещения</div>
+                                <div class="text-sm text-gray-500">Последнее: 12.05.2023</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Активный</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <a href="admin-user-detail.html?id=1" class="text-green-600 hover:text-green-900 mr-3">Подробнее</a>
+                                <button class="text-red-600 hover:text-red-900">Блокировать</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">002</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Алексей Петров</div>
+                                        <div class="text-sm text-gray-500">Регистрация: 20.01.2023</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">alexey@example.com</div>
+                                <div class="text-sm text-gray-500">+7 (123) 456-78-91</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Премиум</div>
+                                <div class="text-sm text-gray-500">До 20.07.2023</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <div class="text-sm text-gray-900">78 посещений</div>
+                                <div class="text-sm text-gray-500">Последнее: 14.05.2023</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Активный</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <a href="admin-user-detail.html?id=2" class="text-green-600 hover:text-green-900 mr-3">Подробнее</a>
+                                <button class="text-red-600 hover:text-red-900">Блокировать</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">003</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Дмитрий Смирнов</div>
+                                        <div class="text-sm text-gray-500">Регистрация: 05.02.2023</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">dmitry@example.com</div>
+                                <div class="text-sm text-gray-500">+7 (123) 456-78-92</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Стандартный</div>
+                                <div class="text-sm text-gray-500">До 05.05.2023</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <div class="text-sm text-gray-900">65 посещений</div>
+                                <div class="text-sm text-gray-500">Последнее: 04.05.2023</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Истек абонемент</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <a href="admin-user-detail.html?id=3" class="text-green-600 hover:text-green-900 mr-3">Подробнее</a>
+                                <button class="text-red-600 hover:text-red-900">Блокировать</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">004</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Сергей Иванов</div>
+                                        <div class="text-sm text-gray-500">Регистрация: 10.02.2023</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">sergey@example.com</div>
+                                <div class="text-sm text-gray-500">+7 (123) 456-78-93</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Премиум</div>
+                                <div class="text-sm text-gray-500">До 10.06.2023</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <div class="text-sm text-gray-900">56 посещений</div>
+                                <div class="text-sm text-gray-500">Последнее: 10.05.2023</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Активный</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <a href="admin-user-detail.html?id=4" class="text-green-600 hover:text-green-900 mr-3">Подробнее</a>
+                                <button class="text-red-600 hover:text-red-900">Блокировать</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">005</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Андрей Козлов</div>
+                                        <div class="text-sm text-gray-500">Регистрация: 15.02.2023</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">andrey@example.com</div>
+                                <div class="text-sm text-gray-500">+7 (123) 456-78-94</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Стандартный</div>
+                                <div class="text-sm text-gray-500">До 15.06.2023</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <div class="text-sm text-gray-900">48 посещений</div>
+                                <div class="text-sm text-gray-500">Последнее: 08.05.2023</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Неактивный</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <a href="admin-user-detail.html?id=5" class="text-green-600 hover:text-green-900 mr-3">Подробнее</a>
+                                <button class="text-red-600 hover:text-red-900">Блокировать</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bg-gray-50 px-6 py-4 border-t border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div class="text-sm text-gray-700">
+                        Показано <span class="font-medium">1-5</span> из <span class="font-medium">25</span> пользователей
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50" disabled>
+                            Предыдущая
+                        </button>
+                        <button class="px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                            Следующая
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+                <p>&copy; 2023 PingPong Club. Панель администратора.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
