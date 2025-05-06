@@ -6,7 +6,7 @@
     <title>Личный кабинет - PingPong Club</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-   <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="bg-gray-100 min-h-screen">
     <header class="bg-green-600 text-white shadow-md">
@@ -16,11 +16,17 @@
                 <h1 class="text-xl font-bold">PingPong Club</h1>
             </div>
             <nav class="hidden md:block">
-                <ul class="flex space-x-6">
-                    <li><a href="index.html" class="hover:text-green-200">Главная</a></li>
-                    <li><a href="booking.html" class="hover:text-green-200">Бронирование</a></li>
-                    <li><a href="statistic.html" class="hover:text-green-200">Статистика</a></li>
-                    <li><a href="#" id="logout-link" class="hover:text-green-200">Выход</a></li>
+               <ul class="flex space-x-6">
+                    <li><a href="index.html" class="hover:text-green-200 font-medium">Главная</a></li>
+                    <li><a href="bookings.html" class="hover:text-green-200">Бронирование</a></li>
+                    <li><a href="admin-bookings.html" class="hover:text-green-200">Текущие</a></li>
+                    <li><a href="statistics.html" class="hover:text-green-200">Статистика</a></li>
+                    <li><a href="login.html" class="hover:text-green-200">Вход</a></li>
+                    <li><a href="register.html" class="hover:text-green-200">Регистрация</a></li>
+                    <li><a href="contacts.html" class="hover:text-green-200">Контакты</a></li>
+                    <li><a href="about.html" class="hover:text-green-200">О клубе</a></li>
+                                       <li><a href="logout.html" class="hover:text-green-200">Выход</a></li>
+
                 </ul>
             </nav>
             <button id="mobile-menu-button" class="md:hidden text-white">
@@ -30,8 +36,8 @@
         <div id="mobile-menu" class="hidden md:hidden bg-green-700">
             <ul class="container mx-auto px-4 py-2">
                 <li class="py-2"><a href="index.html" class="block hover:text-green-200">Главная</a></li>
-                <li class="py-2"><a href="booking.html" class="block hover:text-green-200">Бронирование</a></li>
-                <li class="py-2"><a href="statistic.html" class="block hover:text-green-200">Статистика</a></li>
+                <li class="py-2"><a href="bookings.html" class="block hover:text-green-200">Бронирование</a></li>
+                <li class="py-2"><a href="statistics.html" class="block hover:text-green-200">Статистика</a></li>
                 <li class="py-2"><a href="#" id="mobile-logout-link" class="block hover:text-green-200">Выход</a></li>
             </ul>
         </div>
@@ -161,7 +167,7 @@
                             </table>
                         </div>
                         <div class="mt-4">
-                            <a href="booking.html" class="inline-flex items-center text-green-600 hover:text-green-700">
+                            <a href="bookings.html" class="inline-flex items-center text-green-600 hover:text-green-700">
                                 <i class="fas fa-plus-circle mr-2"></i> Забронировать новый стол
                             </a>
                         </div>

@@ -17,14 +17,11 @@
             </div>
             <nav class="hidden md:block">
                 <ul class="flex space-x-6">
-                    <li><a href="index.html" class="hover:text-green-200 font-medium">Главная</a></li>
-                    <li><a href="bookings.html" class="hover:text-green-200">Бронирование</a></li>
-                    <li><a href="admin-bookings.html" class="hover:text-green-200">Текущие</a></li>
-                    <li><a href="statistics.html" class="hover:text-green-200">Статистика</a></li>
-                    <li><a href="login.html" class="hover:text-green-200">Вход</a></li>
-                    <li><a href="register.html" class="hover:text-green-200">Регистрация</a></li>
-                    <li><a href="contacts.html" class="hover:text-green-200">Контакты</a></li>
-                    <li><a href="about.html" class="hover:text-green-200">О клубе</a></li>
+                    <li><a href="index.html" class="hover:text-green-200">Главная</a></li>
+                    <li><a href="admin-users.html" class="hover:text-green-200">Пользователи</a></li>
+                    <li><a href="admin-reports.html" class="hover:text-green-200">Отчеты</a></li>
+                    <li><a href="admin-settings.html" class="hover:text-green-200 font-medium">Настройки</a></li>
+                    <li><a href="#" id="logout-link" class="hover:text-green-200">Выход</a></li>
                 </ul>
             </nav>
             <button id="mobile-menu-button" class="md:hidden text-white">
@@ -36,7 +33,7 @@
                 <li class="py-2"><a href="index.html" class="block hover:text-green-200">Главная</a></li>
                 <li class="py-2"><a href="admin-users.html" class="block hover:text-green-200">Пользователи</a></li>
                 <li class="py-2"><a href="admin-reports.html" class="block hover:text-green-200">Отчеты</a></li>
-                <li class="py-2"><a href="settings.html" class="block hover:text-green-200">Настройки</a></li>
+                <li class="py-2"><a href="admin-settings.html" class="block hover:text-green-200">Настройки</a></li>
                 <li class="py-2"><a href="#" id="mobile-logout-link" class="block hover:text-green-200">Выход</a></li>
             </ul>
         </div>
@@ -49,27 +46,27 @@
         <div class="mb-8">
             <div class="border-b border-gray-200">
                 <nav class="-mb-px flex space-x-8">
-                    <a href="#" class="border-green-500 text-green-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" id="tab-tables">
+                    <button class="tab-button border-green-500 text-green-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" data-tab="tables">
                         Столы
-                    </a>
-                    <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" id="tab-pricing">
+                    </button>
+                    <button class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" data-tab="pricing">
                         Цены
-                    </a>
-                    <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" id="tab-memberships">
+                    </button>
+                    <button class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" data-tab="memberships">
                         Абонементы
-                    </a>
-                    <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" id="tab-schedule">
+                    </button>
+                    <button class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" data-tab="schedule">
                         Расписание
-                    </a>
-                    <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" id="tab-general">
+                    </button>
+                    <button class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" data-tab="general">
                         Общие
-                    </a>
+                    </button>
                 </nav>
             </div>
         </div>
 
         <!-- Tables Settings -->
-        <div id="tab-content-tables" class="tab-content">
+        <div id="tab-tables" class="tab-content">
             <div class="bg-white rounded-lg shadow-md p-6 mb-8">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-xl font-semibold">Управление столами</h2>
@@ -77,7 +74,7 @@
                         <i class="fas fa-plus mr-2"></i> Добавить стол
                     </button>
                 </div>
-
+                
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
@@ -204,10 +201,10 @@
         </div>
 
         <!-- Pricing Settings -->
-        <div id="tab-content-pricing" class="tab-content hidden">
+        <div id="tab-pricing" class="tab-content hidden">
             <div class="bg-white rounded-lg shadow-md p-6 mb-8">
                 <h2 class="text-xl font-semibold mb-6">Настройка цен</h2>
-
+                
                 <div class="space-y-6">
                     <div>
                         <h3 class="text-lg font-medium mb-4">Стоимость аренды столов</h3>
@@ -262,7 +259,7 @@
                             </table>
                         </div>
                     </div>
-
+                    
                     <div class="border-t pt-6">
                         <h3 class="text-lg font-medium mb-4">Специальные предложения</h3>
                         <div class="overflow-x-auto">
@@ -327,7 +324,7 @@
         </div>
 
         <!-- Memberships Settings -->
-        <div id="tab-content-memberships" class="tab-content hidden">
+        <div id="tab-memberships" class="tab-content hidden">
             <div class="bg-white rounded-lg shadow-md p-6 mb-8">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-xl font-semibold">Управление абонементами</h2>
@@ -335,7 +332,7 @@
                         <i class="fas fa-plus mr-2"></i> Добавить абонемент
                     </button>
                 </div>
-
+                
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
@@ -457,10 +454,10 @@
         </div>
 
         <!-- Schedule Settings -->
-        <div id="tab-content-schedule" class="tab-content hidden">
+        <div id="tab-schedule" class="tab-content hidden">
             <div class="bg-white rounded-lg shadow-md p-6 mb-8">
                 <h2 class="text-xl font-semibold mb-6">Настройка расписания работы</h2>
-
+                
                 <div class="space-y-6">
                     <div>
                         <h3 class="text-lg font-medium mb-4">Часы работы клуба</h3>
@@ -546,7 +543,7 @@
                                     </button>
                                 </div>
                             </div>
-
+                            
                             <div>
                                 <h4 class="text-md font-medium mb-2">Настройки бронирования</h4>
                                 <div class="space-y-4 bg-gray-50 p-4 rounded-lg">
@@ -597,7 +594,7 @@
                             </div>
                         </div>
                     </div>
-
+                    
                     <div class="border-t pt-6">
                         <h3 class="text-lg font-medium mb-4">Выходные и праздничные дни</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -647,7 +644,7 @@
                                     </table>
                                 </div>
                             </div>
-
+                            
                             <div>
                                 <h4 class="text-md font-medium mb-2">Добавить выходной или праздничный день</h4>
                                 <div class="space-y-4 bg-gray-50 p-4 rounded-lg">
@@ -694,10 +691,10 @@
         </div>
 
         <!-- General Settings -->
-        <div id="tab-content-general" class="tab-content hidden">
+        <div id="tab-general" class="tab-content hidden">
             <div class="bg-white rounded-lg shadow-md p-6 mb-8">
                 <h2 class="text-xl font-semibold mb-6">Общие настройки</h2>
-
+                
                 <div class="space-y-6">
                     <div>
                         <h3 class="text-lg font-medium mb-4">Информация о клубе</h3>
@@ -731,7 +728,7 @@
                             </div>
                         </form>
                     </div>
-
+                    
                     <div class="border-t pt-6">
                         <h3 class="text-lg font-medium mb-4">Настройки системы</h3>
                         <div class="space-y-4">
@@ -770,7 +767,7 @@
                                     </select>
                                 </div>
                             </div>
-
+                            
                             <div class="space-y-2">
                                 <h4 class="text-md font-medium">Уведомления</h4>
                                 <div class="flex items-center">
@@ -790,7 +787,7 @@
                                     <label for="notify-registrations" class="ml-2 block text-sm text-gray-900">Уведомления о новых регистрациях</label>
                                 </div>
                             </div>
-
+                            
                             <div class="flex justify-end">
                                 <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition duration-300">
                                     Сохранить настройки
@@ -798,7 +795,7 @@
                             </div>
                         </div>
                     </div>
-
+                    
                     <div class="border-t pt-6">
                         <h3 class="text-lg font-medium mb-4">Резервное копирование</h3>
                         <div class="space-y-4">
@@ -814,7 +811,7 @@
                                     </button>
                                 </div>
                             </div>
-
+                            
                             <div class="bg-gray-50 p-4 rounded-lg">
                                 <h4 class="text-md font-medium mb-2">Настройки автоматического резервного копирования</h4>
                                 <div class="space-y-2">
@@ -870,46 +867,46 @@
             // Mobile menu toggle
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
-
+            
             if (mobileMenuButton && mobileMenu) {
                 mobileMenuButton.addEventListener('click', function() {
                     mobileMenu.classList.toggle('hidden');
                 });
             }
-
+            
             // Tab switching functionality
-            const tabButtons = document.querySelectorAll('[id^="tab-"]');
+            const tabButtons = document.querySelectorAll('.tab-button');
             const tabContents = document.querySelectorAll('.tab-content');
-
+            
             tabButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-
-                    // Remove active class from all tabs
+                button.addEventListener('click', function() {
+                    // Get the tab to show
+                    const tabToShow = this.getAttribute('data-tab');
+                    
+                    // Remove active class from all buttons
                     tabButtons.forEach(btn => {
                         btn.classList.remove('border-green-500', 'text-green-600');
                         btn.classList.add('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
                     });
-
-                    // Add active class to clicked tab
+                    
+                    // Add active class to clicked button
                     this.classList.remove('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
                     this.classList.add('border-green-500', 'text-green-600');
-
+                    
                     // Hide all tab contents
                     tabContents.forEach(content => {
                         content.classList.add('hidden');
                     });
-
-                    // Show corresponding tab content
-                    const tabId = this.id.replace('tab-', 'tab-content-');
-                    document.getElementById(tabId).classList.remove('hidden');
+                    
+                    // Show the selected tab content
+                    document.getElementById('tab-' + tabToShow).classList.remove('hidden');
                 });
             });
-
+            
             // Holiday status change handler
             const holidayStatus = document.getElementById('holiday-status');
             const shortenedHours = document.getElementById('shortened-hours');
-
+            
             if (holidayStatus && shortenedHours) {
                 holidayStatus.addEventListener('change', function() {
                     if (this.value === 'shortened' || this.value === 'special') {
